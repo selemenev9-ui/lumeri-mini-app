@@ -10,6 +10,7 @@
     "deploy": "vk-miniapps-deploy"
   },
   "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.34",
     "@studio-freight/lenis": "^1.0.42",
     "@vkontakte/vk-bridge": "^2.15.1",
     "@vkontakte/vk-mini-apps-router": "^1.7.0",

@@ -1,15 +1,20 @@
 import SplitText from '../components/SplitText.jsx';
+import { asset } from '../utils/assetUrl.js';
 import styles from './InfoScreen.module.css';
 
-const GALLERY = ['/studio/studio-1.jpg', '/studio/studio-2.jpg', '/studio/studio-3.jpg'];
+const GALLERY = [asset('/studio/studio-1.jpg'), asset('/studio/studio-2.jpg'), asset('/studio/studio-3.jpg')];
 
 const LINKS = [
-  { label: '2GIS', url: 'https://2gis.ru/rostov_on_don/firm/3379866562396441' },
-  { label: 'Яндекс Карты', url: 'https://yandex.ru/maps/-/CDXT4dLr' },
-  { label: 'ВКонтакте', url: 'https://vk.com/lumeri_salon' }
+  { label: 'Яндекс Карты', url: 'https://yandex.ru/maps/org/lyumeri/28571972918?si=5pc6e661tcju2q3mh9c3be0nm4' },
+  { label: '2ГИС', url: 'https://2gis.ru/rostov/geo/70000001106106590' },
+  { label: 'ВКонтакте', url: 'https://vk.com/lumeri.studio' }
 ];
 
 export default function InfoScreen() {
+  const handleOpenExternal = (url) => {
+    window.open(url, '_blank');
+  };
+
   return (
     <div className={styles.info}>
       <div className="material" />
@@ -42,12 +47,17 @@ export default function InfoScreen() {
 
         <div className={styles.links}>
           {LINKS.map((link) => (
-            <a key={link.label} className={`glass ${styles.link}`} href={link.url} target="_blank" rel="noreferrer">
+            <button
+              key={link.label}
+              type="button"
+              className={`glass ${styles.link}`}
+              onClick={() => handleOpenExternal(link.url)}
+            >
               <span>{link.label}</span>
               <svg viewBox="0 0 24 24">
                 <path d="M7 17 17 7M7 7h10v10" />
               </svg>
-            </a>
+            </button>
           ))}
         </div>
       </div>

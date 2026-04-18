@@ -89,6 +89,12 @@
   align-items: center;
   justify-content: space-between;
   font-size: 15px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 .link svg {

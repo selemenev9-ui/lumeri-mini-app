@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import SplitText from '../components/SplitText.jsx';
 import Marquee from '../components/Marquee.jsx';
+import { asset } from '../utils/assetUrl.js';
 import styles from './PortfolioScreen.module.css';
 
 const LANES = [
@@ -9,19 +10,19 @@ const LANES = [
     id: 'lashes',
     label: 'Ресницы',
     color: 'rgba(180,100,75,0.1)',
-    items: [1, 2, 5, 6, 11].map((n) => `/portfolio/work_${n}.webp`),
+    items: [1, 2, 5, 6, 11].map((n) => asset(`/portfolio/work_${n}.webp`)),
   },
   {
     id: 'brows',
     label: 'Брови',
     color: 'rgba(120,80,150,0.1)',
-    items: [3, 4, 7, 8, 12].map((n) => `/portfolio/work_${n}.webp`),
+    items: [3, 4, 7, 8, 12].map((n) => asset(`/portfolio/work_${n}.webp`)),
   },
   {
     id: 'cosmetology',
     label: 'Уход',
     color: 'rgba(80,130,120,0.1)',
-    items: [9, 10].map((n) => `/portfolio/work_${n}.webp`),
+    items: [9, 10].map((n) => asset(`/portfolio/work_${n}.webp`)),
   },
 ];
 
