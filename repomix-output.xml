@@ -1,0 +1,2052 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+index.html
+package.json
+public/5. Цветной на прозрачном фоне.png
+public/6. Цветной на цветном фоне.png
+public/7. Цветной на белом фоне.png
+public/logos/logo-dark.png
+public/logos/logo-light.png
+public/logos/logo-transparent.png
+public/logos/logo-white.png
+public/master/master-1.webp
+public/master/master-2.webp
+public/master/master-3.webp
+public/master/master-4.webp
+public/portfolio/work_1.webp
+public/portfolio/work_10.webp
+public/portfolio/work_11.webp
+public/portfolio/work_12.webp
+public/portfolio/work_2.webp
+public/portfolio/work_3.webp
+public/portfolio/work_4.webp
+public/portfolio/work_5.webp
+public/portfolio/work_6.webp
+public/portfolio/work_7.webp
+public/portfolio/work_8.webp
+public/portfolio/work_9.webp
+public/studio/studio-1.jpg
+public/studio/studio-2.jpg
+public/studio/studio-3.jpg
+README.md
+src/App.jsx
+src/components/HeroPhoto.jsx
+src/components/TabBar.jsx
+src/components/TabBar.module.css
+src/main.jsx
+src/screens/BookingScreen.jsx
+src/screens/BookingScreen.module.css
+src/screens/HomeScreen.jsx
+src/screens/HomeScreen.module.css
+src/screens/InfoScreen.jsx
+src/screens/InfoScreen.module.css
+src/screens/PortfolioScreen.jsx
+src/screens/PortfolioScreen.module.css
+src/styles/global.css
+vite.config.js
+vk-hosting-config.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".gitignore">
+node_modules
+dist
+.vite
+.DS_Store
+*.log
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+    <meta name="theme-color" content="#FAF8F5" />
+    <title>Люмэри — студия красоты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="package.json">
+{
+  "name": "lumeri-mini-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "vk-miniapps-deploy"
+  },
+  "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
+    "@vkontakte/vk-bridge": "^2.15.1",
+    "@vkontakte/vk-mini-apps-router": "^1.7.0",
+    "framer-motion": "^11.11.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "@vkontakte/vk-miniapps-deploy": "^0.1.0",
+    "vite": "^5.4.10"
+  }
+}
+</file>
+
+<file path="README.md">
+# Люмэри — VK Mini App
+
+Мини-приложение для студии красоты Люмэри (Ростов-на-Дон).
+
+## Tech Stack
+
+- Vite + React
+- @vkontakte/vk-bridge — VK integration
+- @vkontakte/vk-mini-apps-router — available in deps, used as minimal internal state routing
+- Framer Motion — animations
+- Custom CSS Modules (no UI library)
+
+## Design
+
+- Palette: warm off-white #FAF8F5, stone #5F5E5A, light beige #E8E4DC, border #D3D1C7, text #2C2C2A
+- Fonts: Cormorant Garamond (headings), Inter (body)
+- Mobile-first (base 375px), max-width 520px
+
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+Open http://localhost:5173 in your browser. VK Bridge warnings in console are expected outside VK client.
+
+## Build
+
+```bash
+npm run build
+```
+
+Output: `dist/` — static files ready for deployment.
+
+## Deploy to VK Mini Apps
+
+1. Create an app in [VK Mini Apps Console](https://dev.vk.com/mini-apps/getting-started/quick-start) and note the **App ID**.
+2. Update `vk-hosting-config.json` with your App ID:
+   ```json
+   {
+     "app_id": 1234567
+   }
+   ```
+3. Make sure `dist/` exists: `npm run build`
+4. Run deploy:
+   ```bash
+   npm run deploy
+   ```
+   Follow prompts to authenticate with VK.
+5. Go to your app settings → Mini App → fill in the hosted URL.
+
+## Dikidi Integration
+
+Current flow opens Dikidi landing: `https://dikidi.ru/1109266`
+
+Replace with real API calls later:
+- Search files for `// TODO: replace with real Dikidi API call when token is provided`
+- Services data, available dates, time slots — all mocked
+- Update `BookingScreen.jsx` to fetch live availability once API token is available
+
+## Structure
+
+```
+src/
+  App.jsx               # Routing + VK Bridge setup
+  main.jsx              # Entry point
+  styles/global.css     # Theme variables, resets
+  components/           # TabBar
+  screens/              # Home, Booking, Portfolio, Info
+```
+
+## Navigation
+
+- Bottom tab bar (Главная, Запись, Работы, О студии)
+- Framer Motion page transitions
+
+---
+
+© Люмэри — студия красоты, Ростов-на-Дон
+</file>
+
+<file path="src/App.jsx">
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import bridge from '@vkontakte/vk-bridge';
+
+import HomeScreen from './screens/HomeScreen.jsx';
+import BookingScreen from './screens/BookingScreen.jsx';
+import PortfolioScreen from './screens/PortfolioScreen.jsx';
+import InfoScreen from './screens/InfoScreen.jsx';
+import TabBar from './components/TabBar.jsx';
+
+/**
+ * Routes map. We use internal state for simplicity; @vkontakte/vk-mini-apps-router
+ * is wired as a dependency and can be swapped in here for hash-based routing
+ * when the app is published inside VK.
+ */
+const ROUTES = ['home', 'booking', 'portfolio', 'info'];
+
+const pageVariants = {
+  initial: { opacity: 0, y: 20, filter: 'blur(8px)' },
+  animate: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    filter: 'blur(4px)',
+    transition: { duration: 0.25 }
+  }
+};
+
+const homeVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.3 } },
+  exit: { opacity: 0, transition: { duration: 0.2 } }
+};
+
+export default function App() {
+  const [route, setRoute] = useState('home');
+  const currentScreen = route;
+
+  useEffect(() => {
+    // Sync status-bar / nav color with VK client
+    bridge
+      .send('VKWebAppSetViewSettings', {
+        status_bar_style: 'dark',
+        action_bar_color: '#F4F6F8',
+        navigation_bar_color: '#FFFFFF'
+      })
+      .catch(() => {});
+  }, []);
+
+  const navigate = (next) => {
+    if (!ROUTES.includes(next)) return;
+    setRoute(next);
+  };
+
+  return (
+    <div className="app-shell">
+      <AnimatePresence mode="wait">
+        {currentScreen === 'home' && (
+          <motion.div
+            key={currentScreen}
+            variants={homeVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            style={{ width: '100%', height: '100%' }}
+          >
+            <HomeScreen onNavigate={navigate} />
+          </motion.div>
+        )}
+
+        {currentScreen === 'booking' && (
+          <motion.div
+            key={currentScreen}
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            style={{ width: '100%', height: '100%' }}
+          >
+            <BookingScreen onNavigate={navigate} />
+          </motion.div>
+        )}
+
+        {currentScreen === 'portfolio' && (
+          <motion.div
+            key={currentScreen}
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            style={{ width: '100%', height: '100%' }}
+          >
+            <PortfolioScreen />
+          </motion.div>
+        )}
+
+        {currentScreen === 'info' && (
+          <motion.div
+            key={currentScreen}
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            style={{ width: '100%', height: '100%' }}
+          >
+            <InfoScreen />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <TabBar active={route} onChange={navigate} />
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/HeroPhoto.jsx">
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+
+export default function HeroPhoto({ className }) {
+  const mountRef = useRef(null);
+
+  useEffect(() => {
+    const mount = mountRef.current;
+    if (!mount) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, mount.clientWidth / mount.clientHeight, 0.1, 100);
+    camera.position.z = 3;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    renderer.setClearColor(0x000000, 0);
+    mount.appendChild(renderer.domElement);
+
+    const geometry = new THREE.PlaneGeometry(4, 3, 1, 1);
+    const uniforms = {
+      uTime: { value: 0 },
+      uNoiseScale: { value: 0.25 },
+      uTintA: { value: new THREE.Color('#2a2520') },
+      uTintB: { value: new THREE.Color('#1a1814') },
+      uGlow: { value: new THREE.Color('#F4D5AA') }
+    };
+
+    const material = new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+          modelPosition.y += sin((uv.x + uv.y) * 2.0) * 0.05;
+          gl_Position = projectionMatrix * viewMatrix * modelPosition;
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform float uNoiseScale;
+        uniform vec3 uTintA;
+        uniform vec3 uTintB;
+        uniform vec3 uGlow;
+        float noise(vec2 p){
+          return fract(sin(dot(p ,vec2(12.9898,78.233))) * 43758.5453);
+        }
+        void main() {
+          vec2 uv = vUv;
+          float vignette = smoothstep(1.2, 0.2, distance(uv, vec2(0.5)));
+          float grain = noise(uv * 120.0 + uTime * 0.05) * 0.05;
+          float lightWave = sin((uv.y + uTime * 0.05) * 6.2831) * 0.12;
+          vec3 base = mix(uTintA, uTintB, uv.y + grain + lightWave);
+          vec3 glow = uGlow * (0.3 + 0.7 * smoothstep(0.4, 0.0, uv.y));
+          vec3 color = mix(base, glow, 0.35) * vignette;
+          gl_FragColor = vec4(color, 1.0);
+        }
+      `,
+      transparent: true
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const onPointerMove = (event) => {
+      const { innerWidth, innerHeight } = window;
+      mouseX = (event.clientX / innerWidth - 0.5) * 0.8;
+      mouseY = (event.clientY / innerHeight - 0.5) * 0.8;
+    };
+
+    window.addEventListener('pointermove', onPointerMove);
+
+    let animationId;
+    const clock = new THREE.Clock();
+
+    const animate = () => {
+      animationId = requestAnimationFrame(animate);
+      const elapsed = clock.getElapsedTime();
+      uniforms.uTime.value = elapsed;
+      const targetX = mouseX * 0.2;
+      const targetY = mouseY * 0.15;
+      camera.position.x += (targetX - camera.position.x) * 0.03;
+      camera.position.y += (-targetY - camera.position.y) * 0.03;
+      camera.lookAt(0, 0, 0);
+      mesh.rotation.z += 0.0008;
+      mesh.scale.x = 1.05 + Math.sin(elapsed * 0.05) * 0.02;
+      mesh.scale.y = 1.05 + Math.cos(elapsed * 0.05) * 0.02;
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    const onResize = () => {
+      const { clientWidth, clientHeight } = mount;
+      renderer.setSize(clientWidth, clientHeight);
+      camera.aspect = clientWidth / clientHeight;
+      camera.updateProjectionMatrix();
+    };
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(mount);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('pointermove', onPointerMove);
+      resizeObserver.disconnect();
+      renderer.dispose();
+      geometry.dispose();
+      material.dispose();
+      mount.removeChild(renderer.domElement);
+    };
+  }, []);
+
+  return <div className={className} ref={mountRef} />;
+}
+</file>
+
+<file path="src/components/TabBar.jsx">
+import { motion } from 'framer-motion';
+import styles from './TabBar.module.css';
+
+const TABS = [
+  { id: 'home', label: 'Дом', icon: IconHome },
+  { id: 'booking', label: 'Запись', icon: IconBooking },
+  { id: 'portfolio', label: 'Работы', icon: IconPortfolio },
+  { id: 'info', label: 'О нас', icon: IconInfo }
+];
+
+export default function TabBar({ active = 'home', onChange }) {
+  return (
+    <nav className={styles.bar}>
+      {TABS.map((tab) => {
+        const Icon = tab.icon;
+        const isActive = active === tab.id;
+        return (
+          <button
+            key={tab.id}
+            className={`${styles.tab} ${isActive ? styles.active : ''}`}
+            onClick={() => onChange?.(tab.id)}
+          >
+            <div className={styles.iconWrap}>
+              <Icon active={isActive} />
+              {isActive && (
+                <motion.span
+                  layoutId="tab-dot"
+                  className={styles.dot}
+                  transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+                />
+              )}
+            </div>
+            <span className={styles.label}>{tab.label}</span>
+          </button>
+        );
+      })}
+    </nav>
+  );
+}
+
+function IconHome({ active }) {
+  return (
+    <svg viewBox="0 0 32 32" className={`${styles.icon} ${active ? styles.iconActive : ''}`}>
+      <path d="M4 13.5 16 4l12 9.5V28a1 1 0 0 1-1 1h-6.5a.5.5 0 0 1-.5-.5V21h-8v7.5a.5.5 0 0 1-.5.5H5a1 1 0 0 1-1-1Z" />
+    </svg>
+  );
+}
+
+function IconBooking({ active }) {
+  return (
+    <svg viewBox="0 0 32 32" className={`${styles.icon} ${active ? styles.iconActive : ''}`}>
+      <path d="M8 6h2l.5 2h11L22 6h2a2 2 0 0 1 2 2v18H6V8a2 2 0 0 1 2-2Zm0 7h16" />
+      <path d="M11 17h3v7h-3zM18 17h3v7h-3z" />
+    </svg>
+  );
+}
+
+function IconPortfolio({ active }) {
+  return (
+    <svg viewBox="0 0 32 32" className={`${styles.icon} ${active ? styles.iconActive : ''}`}>
+      <path d="M6 10h20v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2Z" />
+      <path d="M12 10V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3" />
+      <path d="M6 15h20" />
+    </svg>
+  );
+}
+
+function IconInfo({ active }) {
+  return (
+    <svg viewBox="0 0 32 32" className={`${styles.icon} ${active ? styles.iconActive : ''}`}>
+      <path d="M16 28a12 12 0 1 0 0-24 12 12 0 0 0 0 24Z" />
+      <path d="M16 9.5v.2" />
+      <path d="M16 14v8" />
+    </svg>
+  );
+}
+</file>
+
+<file path="src/components/TabBar.module.css">
+.bar {
+  position: fixed;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: min(430px, 100%);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(245, 240, 232, 0.78);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(28, 28, 30, 0.12);
+  z-index: 10;
+  border: none;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-60);
+  transition: color 0.3s var(--smooth);
+}
+
+.tab:active {
+  transform: translateY(1px);
+}
+
+.active {
+  color: var(--ink);
+}
+
+.iconWrap {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.5;
+  transition: opacity 0.3s var(--smooth);
+}
+
+.iconActive {
+  opacity: 1;
+}
+
+.dot {
+  position: absolute;
+  bottom: -4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+</file>
+
+<file path="src/main.jsx">
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import bridge from '@vkontakte/vk-bridge';
+import Lenis from '@studio-freight/lenis';
+import App from './App.jsx';
+import './styles/global.css';
+
+// Initialize VK Bridge for native VK Mini App integration
+bridge.send('VKWebAppInit').catch(() => {
+  // Not running inside VK — ignore in dev
+});
+
+const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+</file>
+
+<file path="src/screens/BookingScreen.jsx">
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import styles from './BookingScreen.module.css';
+
+// TODO: replace with Dikidi API services once token is provided
+const SERVICES = [
+  { id: 'lashes-classic', title: 'Наращивание ресниц', price: 'от 1 800 ₽', duration: '120 мин', category: 'lashes' },
+  { id: 'lashes-led', title: 'LED-наращивание', price: 'от 2 100 ₽', duration: '120 мин', category: 'lashes' },
+  { id: 'lamination-lashes', title: 'Ламинирование ресниц', price: '1 700 ₽', duration: '60 мин', category: 'lashes' },
+  { id: 'lamination-brows', title: 'Ламинирование бровей', price: '1 600 ₽', duration: '45 мин', category: 'brows' },
+  { id: 'removal-lashes', title: 'Снятие ресниц', price: '300 ₽', duration: '20 мин', category: 'lashes' },
+  { id: 'tint-lashes', title: 'Окрашивание ресниц', price: '300 ₽', duration: '20 мин', category: 'lashes' },
+  { id: 'package-all', title: 'Пакет «Всё включено»', price: '1 800 ₽', duration: '90 мин', category: 'care' },
+  { id: 'clean-face', title: 'Чистка лица атравматичная', price: 'от 1 500 ₽', duration: '60 мин', category: 'care' },
+  { id: 'peeling-chemical', title: 'Химический пилинг', price: 'от 1 000 ₽', duration: '45 мин', category: 'care' },
+  { id: 'microcurrent', title: 'Микротоки лицо/тело', price: 'от 1 500 ₽', duration: '60 мин', category: 'care' },
+  { id: 'meso-biorevive', title: 'Мезотерапия/биоревитализация', price: 'от 2 000 ₽', duration: '60 мин', category: 'care' }
+];
+
+const CATEGORY_AMBIENT = {
+  lashes: 'rgba(255, 214, 192, 0.28)',
+  brows: 'rgba(229, 207, 198, 0.32)',
+  care: 'rgba(198, 214, 207, 0.32)'
+};
+
+const TIME_SLOTS = ['10:00', '11:00', '12:30', '13:30', '15:00', '16:30', '18:00'];
+const BUSY_SLOTS = ['11:00', '15:00'];
+
+function buildDates() {
+  const out = [];
+  const today = new Date();
+  for (let i = 0; i < 10; i += 1) {
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+    out.push({
+      label: d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' }).replace('.', ''),
+      weekday: d.toLocaleDateString('ru-RU', { weekday: 'short' }).replace('.', ''),
+      iso: d.toISOString().slice(0, 10)
+    });
+  }
+  return out;
+}
+
+export default function BookingScreen() {
+  const [step, setStep] = useState(1);
+  const [selectedService, setSelectedService] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  const dates = useMemo(buildDates, []);
+
+  const ambientTint = selectedService ? CATEGORY_AMBIENT[selectedService.category] : 'rgba(255,255,255,0)';
+
+  const goToStep = (nextStep) => {
+    if (nextStep <= 1) {
+      setSelectedDate(null);
+      setSelectedTime(null);
+    }
+    setStep(nextStep);
+  };
+
+  const handleConfirm = () => {
+    window.location.href = 'https://dikidi.ru/1109266';
+  };
+
+  return (
+    <div className={styles.booking}>
+      <div className="material" />
+      <div className={styles.ambient} style={{ background: ambientTint }} />
+
+      {step !== 4 && (
+        <div className={styles.header}>
+          <span className={styles.kicker}>ЗАПИСЬ</span>
+          <h1 className={styles.title}>ваш ритуал</h1>
+        </div>
+      )}
+
+      <AnimatePresence mode="wait">
+        {step === 1 && (
+          <motion.div
+            key="step1"
+            className={styles.step}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+          >
+            <p className={styles.sectionTitle}>Выберите ритуал</p>
+            <div className={styles.cardStack}>
+              {SERVICES.map((service, index) => (
+                <motion.button
+                  key={service.id}
+                  className={`${styles.serviceCard} glass ${selectedService?.id === service.id ? styles.serviceActive : ''}`}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                  style={{ transitionDelay: `${index * 40}ms` }}
+                  onClick={() => setSelectedService(service)}
+                >
+                  <div>
+                    <p className={styles.serviceTitle}>{service.title}</p>
+                    <p className={styles.serviceMeta}>{service.duration}</p>
+                  </div>
+                  <span className={styles.priceBadge}>{service.price}</span>
+                </motion.button>
+              ))}
+            </div>
+            <div className={styles.actionsSticky}>
+              <button
+                className="btn-ink"
+                disabled={!selectedService}
+                onClick={() => goToStep(2)}
+              >
+                Далее
+              </button>
+            </div>
+          </motion.div>
+        )}
+
+        {step === 2 && (
+          <motion.div
+            key="step2"
+            className={styles.step}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+          >
+            <p className={styles.sectionTitle}>Когда удобно?</p>
+            <div className={styles.dateStrip}>
+              {dates.map((date) => (
+                <button
+                  key={date.iso}
+                  className={`${styles.dateChip} ${selectedDate === date.iso ? styles.dateActive : ''}`}
+                  onClick={() => setSelectedDate(date.iso)}
+                >
+                  <span className={styles.dateNum}>{date.label}</span>
+                  <span className={styles.dateWeek}>{date.weekday}</span>
+                </button>
+              ))}
+            </div>
+            <div className={styles.actionsSticky}>
+              <button className="btn-glass" onClick={() => goToStep(1)}>
+                Назад
+              </button>
+              <button
+                className="btn-ink"
+                disabled={!selectedDate}
+                onClick={() => goToStep(3)}
+              >
+                Далее
+              </button>
+            </div>
+          </motion.div>
+        )}
+
+        {step === 3 && (
+          <motion.div
+            key="step3"
+            className={styles.step}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+          >
+            <p className={styles.sectionTitle}>Выберите время</p>
+            <div className={styles.grid}>
+              {TIME_SLOTS.map((slot) => {
+                const busy = BUSY_SLOTS.includes(slot);
+                const active = selectedTime === slot;
+                return (
+                  <button
+                    key={slot}
+                    className={`${styles.slot} ${busy ? styles.slotBusy : ''} ${active ? styles.slotActive : ''}`}
+                    onClick={() => !busy && setSelectedTime(slot)}
+                    disabled={busy}
+                  >
+                    {slot}
+                  </button>
+                );
+              })}
+            </div>
+            <div className={styles.actionsSticky}>
+              <button className="btn-glass" onClick={() => goToStep(2)}>
+                Назад
+              </button>
+              <button
+                className="btn-ink"
+                disabled={!selectedTime}
+                onClick={() => goToStep(4)}
+              >
+                Далее
+              </button>
+            </div>
+          </motion.div>
+        )}
+
+        {step === 4 && (
+          <motion.div
+            key="step4"
+            className={styles.confirm}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <img src="/logos/logo-white.png" alt="Люмэри" className={styles.confirmLogo} />
+            <div className={styles.confirmRing}>
+              <div className={styles.confirmRingTrack} />
+              <div className={styles.confirmRingSpinner} />
+            </div>
+            <p className={styles.confirmTitle}>Ритуал назначен</p>
+            <div className={styles.confirmDetails}>
+              <p className={styles.confirmService}>{selectedService?.title}</p>
+              <p className={styles.confirmMeta}>
+                {selectedDate && new Date(`${selectedDate}T12:00:00`).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}
+                <span>·</span>
+                {selectedTime}
+                <span>·</span>
+                {selectedService?.price}
+              </p>
+            </div>
+            <div className={styles.confirmActions}>
+              <button className="btn-glass" onClick={handleConfirm}>
+                Подтвердить в Люмэри
+              </button>
+              <button className={styles.confirmOutline} onClick={() => goToStep(1)}>
+                Изменить
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+</file>
+
+<file path="src/screens/BookingScreen.module.css">
+.booking {
+  position: relative;
+  min-height: 100dvh;
+  padding: calc(var(--safe-top) + 24px) 20px calc(var(--safe-bottom) + 120px);
+  overflow: hidden;
+}
+
+.ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: background 1.5s ease;
+}
+
+.header {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 28px;
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--ink-60);
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 34px;
+  text-transform: lowercase;
+  margin: 4px 0 0;
+}
+
+.step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.cardStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.serviceCard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+  text-align: left;
+  transition: border-color 0.3s var(--smooth);
+}
+
+.serviceTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.serviceMeta {
+  font-size: 12px;
+  color: var(--ink-60);
+}
+
+.priceBadge {
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+}
+
+.serviceActive {
+  border-left: 2px solid var(--ink);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.actionsSticky {
+  position: sticky;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dateStrip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+}
+
+.dateChip {
+  min-width: 100px;
+  padding: 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.65);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dateActive {
+  background: var(--ink);
+  color: #fff;
+}
+
+.dateNum {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.dateWeek {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.slot {
+  padding: 18px 0;
+  border-radius: 18px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-weight: 500;
+  transition: transform 0.25s var(--spring), background 0.3s;
+}
+
+.slot:active {
+  transform: scale(0.94);
+}
+
+.slotBusy {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.slotActive {
+  background: var(--ink);
+  color: white;
+}
+
+.confirm {
+  position: relative;
+  z-index: 3;
+  min-height: 100dvh;
+  padding: calc(var(--safe-top) + 40px) 30px 60px;
+  background: #111820;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.confirmLogo {
+  width: 120px;
+  height: auto;
+}
+
+.confirmRing {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.confirmRingTrack,
+.confirmRingSpinner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.confirmRingSpinner {
+  border-top-color: rgba(255, 255, 255, 0.7);
+  border-left-color: transparent;
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.confirmTitle {
+  font-family: var(--font-display);
+  font-size: 34px;
+  margin: 0;
+}
+
+.confirmDetails {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.confirmService {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.confirmMeta {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.confirmActions {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.confirmOutline {
+  border-radius: var(--radius-pill);
+  padding: 14px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+}
+</file>
+
+<file path="src/screens/HomeScreen.jsx">
+import { useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
+import styles from './HomeScreen.module.css';
+
+const CATEGORIES = [
+  { id: 'lashes', label: 'Ресницы' },
+  { id: 'brows', label: 'Брови' },
+  { id: 'care', label: 'Уход' }
+];
+
+export default function HomeScreen({ onNavigate }) {
+  const [activeCategory, setActiveCategory] = useState('lashes');
+  const now = new Date();
+  const localizedDate = now.toLocaleDateString('ru-RU', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long'
+  });
+
+  const nextSlot = useMemo(() => {
+    const future = new Date();
+    future.setDate(future.getDate() + 1);
+    future.setHours(14, 30, 0, 0);
+    return future;
+  }, []);
+
+  const countdown = useMemo(() => formatCountdown(nextSlot - now), [nextSlot, now]);
+
+  return (
+    <>
+      <div className="material" />
+      <div className={styles.home}>
+        <div className={styles.heroPhoto}>
+          <img src="/master/master-1.webp" alt="" className={styles.heroImg} />
+          <div className={styles.heroFade} />
+        </div>
+
+        <div className={styles.statusBar}>
+          <span>{now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}</span>
+          <div className={styles.statusIcons}>
+            <span className={styles.statDot} />
+            <span className={styles.statLine} />
+            <span className={styles.statBattery} />
+          </div>
+        </div>
+
+        <div className={styles.logoCenter}>ЛЮМЭРИ</div>
+
+        <div className={styles.content}>
+          <div className={styles.greetingRow}>
+            <p className={styles.greeting}>ритуал преображения</p>
+            <span className={styles.datePill}>{localizedDate}</span>
+          </div>
+
+          <motion.div
+            className={`${styles.slotCard} glass`}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div>
+              <p className={styles.slotLabel}>Ближайшее окошко</p>
+              <p className={styles.slotTime}>{nextSlot.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}</p>
+              <p className={styles.slotMeta}>{nextSlot.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}</p>
+            </div>
+            <button className="btn-ink" onClick={() => onNavigate?.('booking')}>
+              Записаться
+            </button>
+          </motion.div>
+
+          <div className={styles.categories}>
+            {CATEGORIES.map((cat) => (
+              <motion.button
+                key={cat.id}
+                whileTap={{ scale: 0.93 }}
+                className={`${styles.categoryChip} ${activeCategory === cat.id ? styles.categoryActive : ''}`}
+                onClick={() => setActiveCategory(cat.id)}
+              >
+                {cat.label}
+              </motion.button>
+            ))}
+          </div>
+
+          <div className={styles.countdownWrap}>
+            <div className={styles.countdownCard}>
+              <p className={styles.countLabel}>До вашей трансформации</p>
+              <p className={styles.countValue}>{countdown}</p>
+              <button className="btn-glass" onClick={() => onNavigate?.('booking')}>
+                Детали визита
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function formatCountdown(ms) {
+  const totalMinutes = Math.max(0, Math.floor(ms / 60000));
+  const days = Math.floor(totalMinutes / (60 * 24));
+  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+  const minutes = totalMinutes % 60;
+  return `${pad(days)} дня · ${pad(hours)} ч · ${pad(minutes)} м`;
+}
+
+function pad(num) {
+  return String(num).padStart(2, '0');
+}
+</file>
+
+<file path="src/screens/HomeScreen.module.css">
+.home {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  color: var(--cream);
+}
+
+.heroPhoto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  animation: kenburns 14s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.06) translate(-1%, 2%);
+  }
+}
+
+.heroFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background: linear-gradient(
+    0deg,
+    #f5f0e8 0%,
+    rgba(245, 240, 232, 0.97) 12%,
+    rgba(245, 240, 232, 0.8) 30%,
+    rgba(245, 240, 232, 0.3) 55%,
+    transparent 100%
+  );
+}
+
+.statusBar {
+  position: relative;
+  padding: calc(var(--safe-top) + 12px) 18px 0;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 2;
+}
+
+.statusIcons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.statLine {
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.statBattery {
+  width: 16px;
+  height: 8px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  position: relative;
+}
+
+.statBattery::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  right: -3px;
+  width: 2px;
+  height: 4px;
+  background: currentColor;
+}
+
+.logoCenter {
+  position: absolute;
+  top: 12%;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 0.26em;
+  color: rgba(255, 255, 255, 0.92);
+  z-index: 2;
+}
+
+.content {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: calc(98px + var(--safe-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 3;
+  color: var(--ink);
+}
+
+.greetingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.greeting {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  margin: 0;
+  color: var(--ink);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-left: 18px;
+}
+
+.datePill {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(245, 240, 232, 0.7);
+  color: var(--ink-60);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.slotCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.45);
+  border: 0.5px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 8px 24px rgba(28, 28, 30, 0.06);
+}
+
+.slotCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 210, 183, 0.35), transparent 60%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.slotCard:active::after {
+  opacity: 1;
+  transform: scale(1.4);
+}
+
+.slotLabel {
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+
+.slotTime {
+  font-family: var(--font-display);
+  font-size: 30px;
+  margin: 4px 0;
+  color: var(--ink);
+}
+
+.slotMeta {
+  font-size: 13px;
+  color: var(--ink-60);
+}
+
+.categories {
+  display: flex;
+  gap: 8px;
+}
+
+.categoryChip {
+  flex: 1;
+  border-radius: 24px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 0.5px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(30px);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.25s var(--smooth), color 0.25s var(--smooth);
+}
+
+.categoryActive {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--ink);
+}
+
+.countdownWrap {
+  box-shadow: 0 -8px 32px rgba(245, 240, 232, 0.8);
+  border-radius: 22px;
+}
+
+.countdownCard {
+  background: rgba(28, 28, 30, 0.82);
+  border-radius: 22px;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.countLabel {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.countValue {
+  font-family: var(--font-display);
+  font-size: 22px;
+  margin: 12px 0;
+}
+</file>
+
+<file path="src/screens/InfoScreen.jsx">
+import styles from './InfoScreen.module.css';
+
+const GALLERY = ['/studio/studio-1.jpg', '/studio/studio-2.jpg', '/studio/studio-3.jpg'];
+
+const LINKS = [
+  { label: '2GIS', url: 'https://2gis.ru/rostov_on_don/firm/3379866562396441' },
+  { label: 'Яндекс Карты', url: 'https://yandex.ru/maps/-/CDXT4dLr' },
+  { label: 'ВКонтакте', url: 'https://vk.com/lumeri_salon' }
+];
+
+export default function InfoScreen() {
+  return (
+    <div className={styles.info}>
+      <div className="material" />
+      <div className={styles.inner}>
+        <div className={styles.galleryRow}>
+          {GALLERY.map((src, idx) => (
+            <div key={src} className={styles.galleryCard}>
+              <img src={src} alt={`Студия ${idx + 1}`} loading="lazy" />
+            </div>
+          ))}
+        </div>
+
+        <div className={`glass ${styles.card}`}>
+          <p className={styles.cardLabel}>Контакты</p>
+          <p className={styles.cardValue}>Ростов-на-Дону, Каменобродская 33/22</p>
+          <p className={styles.cardValue}>пн–вс · 10:00—20:00</p>
+          <a href="tel:+79001292299" className={styles.cardLink}>+7 (900) 129-22-99</a>
+        </div>
+
+        <div className={`glass ${styles.card}`}>
+          <p className={styles.cardLabel}>О мастере</p>
+          <p className={styles.quote}>
+            «Медицинский взгляд, ювелирная точность и абсолютный комфорт на каждой процедуре.»
+          </p>
+        </div>
+
+        <div className={styles.links}>
+          {LINKS.map((link) => (
+            <a key={link.label} className={`glass ${styles.link}`} href={link.url} target="_blank" rel="noreferrer">
+              <span>{link.label}</span>
+              <svg viewBox="0 0 24 24">
+                <path d="M7 17 17 7M7 7h10v10" />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/screens/InfoScreen.module.css">
+.info {
+  position: relative;
+  min-height: 100dvh;
+  padding: calc(var(--safe-top) + 24px) 20px calc(var(--safe-bottom) + 120px);
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.galleryRow {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.galleryCard {
+  flex: 0 0 220px;
+  height: 280px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 28px rgba(28, 28, 30, 0.18);
+}
+
+.galleryCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card {
+  padding: 20px;
+}
+
+.cardLabel {
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+  margin-bottom: 8px;
+}
+
+.cardValue {
+  font-size: 15px;
+  margin: 2px 0;
+  color: var(--ink);
+}
+
+.cardLink {
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.quote {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink-60);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.link svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--ink);
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+</file>
+
+<file path="src/screens/PortfolioScreen.jsx">
+import { useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
+import styles from './PortfolioScreen.module.css';
+
+const FILTERS = [
+  { id: 'all', label: 'Все' },
+  { id: 'lashes', label: 'Ресницы' },
+  { id: 'brows', label: 'Брови' },
+  { id: 'cosmetology', label: 'Косметология' }
+];
+
+const PORTFOLIO_ITEMS = [
+  { id: 1, src: '/portfolio/work_1.webp', category: 'lashes', label: 'Ресницы' },
+  { id: 2, src: '/portfolio/work_2.webp', category: 'lashes', label: 'Ресницы' },
+  { id: 3, src: '/portfolio/work_3.webp', category: 'brows', label: 'Брови' },
+  { id: 4, src: '/portfolio/work_4.webp', category: 'brows', label: 'Брови' },
+  { id: 5, src: '/portfolio/work_5.webp', category: 'lashes', label: 'Ресницы' },
+  { id: 6, src: '/portfolio/work_6.webp', category: 'lashes', label: 'Ресницы' },
+  { id: 7, src: '/portfolio/work_7.webp', category: 'brows', label: 'Брови' },
+  { id: 8, src: '/portfolio/work_8.webp', category: 'brows', label: 'Брови' },
+  { id: 9, src: '/portfolio/work_9.webp', category: 'cosmetology', label: 'Уход' },
+  { id: 10, src: '/portfolio/work_10.webp', category: 'cosmetology', label: 'Уход' },
+  { id: 11, src: '/portfolio/work_11.webp', category: 'lashes', label: 'Ресницы' },
+  { id: 12, src: '/portfolio/work_12.webp', category: 'brows', label: 'Брови' }
+];
+
+export default function PortfolioScreen() {
+  const [filter, setFilter] = useState('all');
+
+  const filteredWorks = useMemo(() => {
+    if (filter === 'all') return PORTFOLIO_ITEMS;
+    return PORTFOLIO_ITEMS.filter((work) => work.category === filter);
+  }, [filter]);
+
+  return (
+    <div className={styles.portfolio}>
+      <div className="material" />
+      <div className={styles.inner}>
+        <div className={styles.header}>
+          <span className={styles.kicker}>галерея</span>
+          <h1 className={styles.title}>портфолио</h1>
+        </div>
+
+        <div className={styles.filters}>
+          {FILTERS.map((item) => (
+            <button
+              key={item.id}
+              className={`${styles.filterChip} ${filter === item.id ? styles.filterActive : ''}`}
+              onClick={() => setFilter(item.id)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+
+        <motion.div className={styles.grid}>
+          {filteredWorks.map((work, index) => (
+            <motion.div
+              key={work.id}
+              className={styles.card}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.06, duration: 0.45, ease: 'easeOut' }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <img src={work.src} alt={work.label} className={styles.cardImage} />
+              <div className={styles.cardMeta}>{work.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/screens/PortfolioScreen.module.css">
+.portfolio {
+  position: relative;
+  min-height: 100dvh;
+  padding: calc(var(--safe-top) + 24px) 20px calc(var(--safe-bottom) + 110px);
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.kicker {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+
+.title {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: 32px;
+  text-transform: lowercase;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+
+.filterChip {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+
+.filterActive {
+  background: var(--ink);
+  color: #fff;
+  border-color: transparent;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  min-height: 220px;
+  box-shadow: 0 18px 35px rgba(28, 28, 30, 0.35);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cardMeta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 85%);
+}
+</file>
+
+<file path="src/styles/global.css">
+:root {
+  --cream: #F5F0E8;
+  --cream-dark: #EDE8DF;
+  --linen: #F0EBE1;
+  --glass-white: rgba(255, 255, 255, 0.52);
+  --glass-border: rgba(255, 255, 255, 0.92);
+  --glass-shine: rgba(255, 255, 255, 0.55);
+  --ink: #1C1C1E;
+  --ink-60: rgba(28, 28, 30, 0.6);
+  --ink-30: rgba(28, 28, 30, 0.3);
+  --ink-10: rgba(28, 28, 30, 0.08);
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-card: 22px;
+  --radius-pill: 28px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+body {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.app-shell {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.material {
+  position: fixed;
+  inset: 0;
+  max-width: 430px;
+  margin: 0 auto;
+  background:
+    radial-gradient(ellipse 120% 55% at 25% 0%, rgba(255, 248, 230, 0.95) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 80% at 85% 100%, rgba(232, 225, 210, 0.7) 0%, transparent 55%),
+    var(--cream);
+  z-index: 0;
+}
+
+.material::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 120px;
+}
+
+.glass {
+  background: var(--glass-white);
+  border: 0.5px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  box-shadow:
+    0 1px 0 var(--glass-shine) inset,
+    0 8px 32px rgba(28, 28, 30, 0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, transparent 100%);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  pointer-events: none;
+}
+
+.btn-ink {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.92);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 14px 28px;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s var(--spring);
+}
+
+.btn-ink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  border-radius: var(--radius-pill) var(--radius-pill) 0 0;
+}
+
+.btn-ink:active {
+  transform: scale(0.94);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.45);
+  border: 0.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-pill);
+  padding: 14px 28px;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(30px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  transition: transform 0.25s var(--spring);
+}
+
+.btn-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, transparent 100%);
+  border-radius: var(--radius-pill) var(--radius-pill) 0 0;
+}
+
+.btn-glass:active {
+  transform: scale(0.94);
+}
+
+.section-subtle {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+</file>
+
+<file path="vite.config.js">
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  base: './',
+  build: {
+    outDir: 'dist',
+    assetsInlineLimit: 0
+  }
+});
+</file>
+
+<file path="vk-hosting-config.json">
+{
+  "static_path": "dist",
+  "endpoint_main": "index.html",
+  "endpoint_mobile": "index.html",
+  "app_id": 0
+}
+</file>
+
+</files>
