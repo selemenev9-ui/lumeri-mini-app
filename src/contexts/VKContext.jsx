@@ -23,7 +23,7 @@ export function VKProvider({ children }) {
       }
 
       return bridge
-        .send('VKWebAppResizeWindow', { width: 700, height: 750 })
+        .send('VKWebAppResizeWindow', { width: 700, height: 600 })
         .catch((error) => {
           console.error('VKWebAppResizeWindow failed:', error);
         });
