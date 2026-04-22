@@ -38,6 +38,16 @@ body,
   overscroll-behavior: none;
 }
 
+html,
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
 body {
   font-size: 15px;
   line-height: 1.6;
@@ -58,9 +68,9 @@ button {
 .app-shell {
   max-width: 430px;
   margin: 0 auto;
-  min-height: 100dvh;
+  height: 100%;
   position: relative;
-  overflow: visible;
+  overflow-y: auto;
   background: transparent;
   color: var(--ink);
   padding-bottom: 90px;
