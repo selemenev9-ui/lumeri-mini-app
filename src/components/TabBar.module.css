@@ -1,17 +1,16 @@
 .bar {
   position: fixed;
-  bottom: 14px;
-  left: 8px;
-  right: 8px;
-  margin: 0 auto;
-  width: calc(100% - 16px);
-  max-width: 414px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
   padding: 8px 10px calc(var(--safe-bottom) + 8px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 28px;
-  z-index: 40;
+  z-index: 100;
   border: none;
 }
 

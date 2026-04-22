@@ -22,8 +22,11 @@ export function VKProvider({ children }) {
         return Promise.resolve();
       }
 
+      const screenHeight = window.innerHeight || 900;
+      const optimalHeight = Math.min(1000, Math.max(600, screenHeight - 100));
+
       return bridge
-        .send('VKWebAppResizeWindow', { width: 800, height: 1000 })
+        .send('VKWebAppResizeWindow', { width: 800, height: optimalHeight })
         .catch((error) => {
           console.error('VKWebAppResizeWindow failed:', error);
         });
