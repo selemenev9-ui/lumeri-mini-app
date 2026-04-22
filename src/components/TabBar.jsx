@@ -8,13 +8,13 @@ const TABS = [
   { id: 'booking', label: 'Запись', icon: IconBooking },
   { id: 'portfolio', label: 'Работы', icon: IconPortfolio },
   { id: 'info', label: 'О нас', icon: IconInfo },
-  { id: 'aura', label: 'Аура', icon: IconAura }
+  { id: 'profile', label: 'Кабинет', icon: IconProfile }
 ];
 
 export default function TabBar({ active = 'home', onChange, isHidden = false }) {
   return (
     <nav
-      className={styles.bar}
+      className={`${styles.bar} glass-panel`}
       style={{ opacity: isHidden ? 0 : 1, pointerEvents: isHidden ? 'none' : 'auto', transition: 'opacity 0.3s ease' }}
     >
       {TABS.map((tab) => (
@@ -34,7 +34,9 @@ function MagneticTab({ tab, isActive, onChange }) {
   const Icon = tab.icon;
   return (
     <div ref={ref} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
-      <button
+      <motion.button
+        type="button"
+        whileTap={{ scale: 0.97 }}
         className={`${styles.tab} ${isActive ? styles.active : ''}`}
         onClick={() => {
           haptic.light();
@@ -52,7 +54,7 @@ function MagneticTab({ tab, isActive, onChange }) {
           )}
         </div>
         <span className={styles.label}>{tab.label}</span>
-      </button>
+      </motion.button>
     </div>
   );
 }
@@ -94,11 +96,11 @@ function IconInfo({ active }) {
   );
 }
 
-function IconAura({ active }) {
+function IconProfile({ active }) {
   return (
     <svg viewBox="0 0 32 32" className={`${styles.icon} ${active ? styles.iconActive : ''}`}>
-      <path d="M16 4 L17.5 13 L26 16 L17.5 19 L16 28 L14.5 19 L6 16 L14.5 13 Z" strokeWidth="1.4" />
-      <circle cx="16" cy="16" r="3" strokeWidth="1.4" />
+      <circle cx="16" cy="11" r="4.2" />
+      <path d="M7.5 26c0-4.8 3.8-8 8.5-8s8.5 3.2 8.5 8" />
     </svg>
   );
 }

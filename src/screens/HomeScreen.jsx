@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Marquee from '../components/Marquee.jsx';
+import ServiceDrawer from '../components/ServiceDrawer.jsx';
+import { useVK } from '../contexts/VKContext.jsx';
 import { asset } from '../utils/assetUrl.js';
-import { haptic } from '../utils/haptic.js';
 import styles from './HomeScreen.module.css';
 
 const CATEGORIES = [
@@ -11,8 +12,34 @@ const CATEGORIES = [
   { id: 'care', label: 'Уход' }
 ];
 
+const SERVICES_DATA = {
+  lashes: {
+    title: 'Наращивание ресниц',
+    description:
+      'Идеальный взгляд без макияжа. Мы используем ультратонкие материалы и гипоаллергенный клей, чтобы наращивание было невесомым и безопасным для ваших родных ресниц.',
+    price: 'от 2 000 ₽',
+    link: 'https://dikidi.ru/1109266'
+  },
+  brows: {
+    title: 'Архитектура бровей',
+    description:
+      'Ламинирование, коррекция и бережное окрашивание. Подберем идеальную форму и оттенок, которые подчеркнут геометрию вашего лица.',
+    price: 'от 1 200 ₽',
+    link: 'https://dikidi.ru/1109266'
+  },
+  care: {
+    title: 'Уход за кожей',
+    description:
+      'Эстетическая косметология и глубокое очищение. Процедуры, направленные на сияние, ровный тон и восстановление ресурса вашей кожи.',
+    price: 'от 2 500 ₽',
+    link: 'https://dikidi.ru/1109266'
+  }
+};
+
 export default function HomeScreen() {
+  const { triggerHaptic } = useVK();
   const [activeCategory, setActiveCategory] = useState('lashes');
+  const [activeService, setActiveService] = useState(null);
   const [timeTint, setTimeTint] = useState('rgba(0,0,0,0)');
   const now = new Date();
   const localizedDate = now.toLocaleDateString('ru-RU', {
@@ -40,40 +67,39 @@ export default function HomeScreen() {
     setTimeTint(tint);
   }, []);
 
+  useEffect(() => {
+    if (!activeService) return undefined;
+
+    const { overflow } = document.body.style;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = overflow;
+    };
+  }, [activeService]);
+
   const handleCategorySelect = (id) => {
-    haptic.select();
+    triggerHaptic('light');
     setActiveCategory(id);
+    setActiveService(id);
   };
 
   return (
-    <>
-      <div className="material" />
-      <div className={styles.home}>
-        <div className={styles.heroPhoto}>
-          <img src={asset('/master/master-1.webp')} alt="" className={styles.heroImg} />
-          <div className={styles.heroFade} />
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 2,
-              background: timeTint,
-              mixBlendMode: 'multiply',
-              transition: 'background 3s ease',
-              pointerEvents: 'none',
-            }}
-          />
-        </div>
-
-        <div className={styles.statusBar}>
-          <span>{now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}</span>
-          <div className={styles.statusIcons}>
-            <span className={styles.statDot} />
-            <span className={styles.statLine} />
-            <span className={styles.statBattery} />
-          </div>
-        </div>
-
+    <div className={styles.home}>
+      <div className={styles.heroPhoto}>
+        <img src={asset('/master/master-1.webp')} alt="" className={styles.heroImg} />
+        <div className={styles.heroFade} />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 2,
+            background: timeTint,
+            mixBlendMode: 'multiply',
+            transition: 'background 3s ease',
+            pointerEvents: 'none',
+          }}
+        />
         <div className={styles.logoCenter}>ЛЮМЭРИ</div>
         <span className={styles.datePill}>{localizedDate}</span>
 
@@ -82,8 +108,9 @@ export default function HomeScreen() {
             {CATEGORIES.map((cat) => (
               <motion.button
                 key={cat.id}
-                whileTap={{ scale: 0.93 }}
-                className={`${styles.categoryChip} ${activeCategory === cat.id ? styles.categoryActive : ''}`}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                className={`${styles.categoryChip} glass-panel ${activeCategory === cat.id ? `${styles.categoryActive} glass-panel-active` : ''}`}
                 onClick={() => handleCategorySelect(cat.id)}
               >
                 {cat.label}
@@ -94,6 +121,12 @@ export default function HomeScreen() {
           <Marquee speed={30} />
         </div>
       </div>
-    </>
+
+      <ServiceDrawer
+        isOpen={!!activeService}
+        onClose={() => setActiveService(null)}
+        data={activeService ? SERVICES_DATA[activeService] : null}
+      />
+    </div>
   );
 }

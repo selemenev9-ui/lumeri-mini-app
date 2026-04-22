@@ -1,15 +1,24 @@
 .booking {
   position: relative;
   min-height: 100dvh;
-  padding: calc(var(--safe-top) + 24px) 20px calc(var(--safe-bottom) + 120px);
+  padding: calc(var(--safe-top) + 24px) 20px calc(var(--safe-bottom) + var(--tabbar-space));
   overflow: hidden;
 }
 
-.ambient {
+.ambientGlow {
   position: absolute;
-  inset: 0;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  filter: blur(95px);
   pointer-events: none;
-  transition: background 1.5s ease;
+  z-index: 0;
+}
+
+.contentLayer {
+  position: relative;
+  z-index: 1;
 }
 
 .header {
@@ -30,6 +39,42 @@
   font-size: 34px;
   text-transform: lowercase;
   margin: 4px 0 0;
+}
+
+.tabsContainer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  padding: 8px 20px 16px;
+  margin: 0 -20px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 22px;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: transform 0.2s var(--smooth), color 0.25s var(--smooth);
+  font-family: var(--font-body);
+}
+
+.activeTab {
+  color: var(--ink);
+  transform: translateY(-1px);
 }
 
 .step {
@@ -56,35 +101,69 @@
 .serviceCard {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  padding: 18px;
+  flex-direction: column;
+  padding: 16px;
   text-align: left;
-  transition: border-color 0.3s var(--smooth);
+  cursor: pointer;
+  transition: border-color 0.28s var(--smooth), background 0.28s var(--smooth), transform 0.22s var(--smooth);
+}
+
+.serviceCard:focus-visible {
+  outline: 2px solid rgba(28, 28, 30, 0.45);
+  outline-offset: 2px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.serviceMetadata {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 9px;
 }
 
 .serviceTitle {
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 1.25;
   font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+.activeCard {
+  transform: scale(0.98);
+}
+
+.serviceDuration {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.servicePrice {
+  font-size: 15px;
+  font-weight: 600;
   color: var(--ink);
 }
 
-.serviceMeta {
-  font-size: 12px;
-  color: var(--ink-60);
-}
-
-.priceBadge {
-  align-self: flex-start;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 12px;
-}
-
-.serviceActive {
-  border-left: 2px solid var(--ink);
-  background: rgba(255, 255, 255, 0.65);
+.inlineBookButton {
+  width: 100%;
+  padding: 14px 0;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--ink);
+  border-radius: 16px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  border: 0.5px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .selectedBar {
@@ -109,14 +188,6 @@
 .selectedPrice {
   font-size: 12px;
   color: rgba(28, 28, 30, 0.5);
-}
-
-.actionsSticky {
-  position: sticky;
-  bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .dateStrip {

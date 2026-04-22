@@ -31,7 +31,13 @@ export default function PortfolioScreen() {
 
   return (
     <div className={styles.portfolio}>
-      <div className="material" />
+      <motion.div
+        className={styles.ambientGlow}
+        animate={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(255, 170, 150, 0.8), transparent 70%)'
+        }}
+        transition={{ duration: 0.8, ease: 'easeInOut' }}
+      />
 
       <div
         className={styles.bgOverlay}
@@ -60,11 +66,11 @@ export default function PortfolioScreen() {
               </div>
 
               <div className={styles.laneScroll}>
-                {lane.items.map((src, i) => (
+                {lane.items.map((src) => (
                   <motion.div
                     key={src}
-                    className={styles.card}
-                    whileTap={{ scale: 1.04 }}
+                    className={`${styles.card} glass-panel`}
+                    whileTap={{ scale: 0.97 }}
                     transition={{ type: 'spring', stiffness: 260, damping: 18 }}
                     onTapStart={() => setActiveLane(lane)}
                   >

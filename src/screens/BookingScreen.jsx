@@ -1,41 +1,25 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import SplitText from '../components/SplitText.jsx';
 import useViscousScroll from '../hooks/useViscousScroll.js';
+import { useVK } from '../contexts/VKContext.jsx';
+import { SERVICES_CATEGORIES, SERVICES_DATA } from '../data/services.js';
 import styles from './BookingScreen.module.css';
 
-// TODO: replace with Dikidi API services once token is provided
-const SERVICES = [
-  { id: 'lashes-classic', title: 'Наращивание ресниц', price: 'от 1 800 ₽', duration: '120 мин', category: 'lashes' },
-  { id: 'lashes-led', title: 'LED-наращивание', price: 'от 2 100 ₽', duration: '120 мин', category: 'lashes' },
-  { id: 'lamination-lashes', title: 'Ламинирование ресниц', price: '1 700 ₽', duration: '60 мин', category: 'lashes' },
-  { id: 'lamination-brows', title: 'Ламинирование бровей', price: '1 600 ₽', duration: '45 мин', category: 'brows' },
-  { id: 'removal-lashes', title: 'Снятие ресниц', price: '300 ₽', duration: '20 мин', category: 'lashes' },
-  { id: 'tint-lashes', title: 'Окрашивание ресниц', price: '300 ₽', duration: '20 мин', category: 'lashes' },
-  { id: 'package-all', title: 'Пакет «Всё включено»', price: '1 800 ₽', duration: '90 мин', category: 'care' },
-  { id: 'clean-face', title: 'Чистка лица атравматичная', price: 'от 1 500 ₽', duration: '60 мин', category: 'care' },
-  { id: 'peeling-chemical', title: 'Химический пилинг', price: 'от 1 000 ₽', duration: '45 мин', category: 'care' },
-  { id: 'microcurrent', title: 'Микротоки лицо/тело', price: 'от 1 500 ₽', duration: '60 мин', category: 'care' },
-  { id: 'meso-biorevive', title: 'Мезотерапия/биоревитализация', price: 'от 2 000 ₽', duration: '60 мин', category: 'care' }
-];
-
-const SERVICE_COLORS = {
-  'lashes':            'rgba(180,100,75,0.13)',
-  'lashes-led':        'rgba(160,80,120,0.13)',
-  'lamination-lashes': 'rgba(190,120,70,0.12)',
-  'lamination-brows':  'rgba(120,80,150,0.12)',
-  'removal':           'rgba(100,120,170,0.12)',
-  'coloring':          'rgba(150,90,130,0.12)',
-  'all-included':      'rgba(170,110,80,0.13)',
-  'cleaning':          'rgba(80,130,120,0.12)',
-  'peeling':           'rgba(140,160,100,0.11)',
-  'microcurrent':      'rgba(90,110,160,0.12)',
-  'meso':              'rgba(160,100,140,0.13)',
-  'default':           '#F5F0E8',
+const CATEGORY_COLORS = {
+  default: '#B8916A',
+  brows: '#C4836A',
+  lashes: '#7AAF94',
+  cosmetology: '#9A7AB8'
 };
 
 export default function BookingScreen({ onDarkChange, onConfirmChange }) {
   const listRef = useRef(null);
+  const { triggerHaptic } = useVK();
+  const [activeTab, setActiveTab] = useState('brows');
+  const [activeService, setActiveService] = useState(null);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const filteredServices = SERVICES_DATA.filter((service) => service.category === activeTab);
   useViscousScroll(listRef);
 
   useEffect(() => {
@@ -43,20 +27,51 @@ export default function BookingScreen({ onDarkChange, onConfirmChange }) {
     onDarkChange?.(false);
   }, [onConfirmChange, onDarkChange]);
 
-  const ambientTint = SERVICE_COLORS.default;
+  const handleServiceSelect = (service) => {
+    triggerHaptic('medium');
 
-  const handleOnlineBooking = () => {
-    window.open('https://dikidi.ru/1109266', '_blank');
+    if (activeService?.id === service.id) {
+      setActiveService(null);
+      setActiveCategory(null);
+      return;
+    }
+
+    setActiveService(service);
+    setActiveCategory(service.category);
   };
 
   return (
     <div className={styles.booking}>
-        <div className="material" />
-        <div className={styles.ambient} style={{ background: ambientTint }} />
+      <motion.div
+        className={styles.ambientGlow}
+        animate={{
+          background: `radial-gradient(circle at 50% 50%, ${CATEGORY_COLORS[activeCategory || 'default']}, transparent 70%)`
+        }}
+        transition={{ duration: 0.8, ease: 'easeInOut' }}
+      />
 
+      <div className={styles.contentLayer}>
         <div className={styles.header}>
           <span className={styles.kicker}>ЗАПИСЬ</span>
           <SplitText text="ваш ритуал" className={styles.title} delay={0.1} />
+        </div>
+
+        <div className={styles.tabsContainer}>
+          {SERVICES_CATEGORIES.map((category) => (
+            <button
+              key={category.id}
+              type="button"
+              className={`${styles.tab} glass-panel ${activeTab === category.id ? `${styles.activeTab} glass-panel-active` : ''}`}
+              onClick={() => {
+                triggerHaptic('light');
+                setActiveTab(category.id);
+                setActiveService(null);
+                setActiveCategory(null);
+              }}
+            >
+              {category.label}
+            </button>
+          ))}
         </div>
 
         <motion.div
@@ -66,30 +81,62 @@ export default function BookingScreen({ onDarkChange, onConfirmChange }) {
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
           <p className={styles.sectionTitle}>Услуги</p>
-          <div className={styles.cardStack} ref={listRef}>
-            {SERVICES.map((service, index) => (
+          <motion.div className={styles.cardStack} ref={listRef}>
+            {filteredServices.map((service, index) => (
               <motion.div
                 key={service.id}
+                role="button"
+                tabIndex={0}
                 data-viscous
-                className={`${styles.serviceCard} glass`}
-                whileTap={{ scale: 0.99 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-                style={{ transitionDelay: `${index * 40}ms` }}
+                className={`${styles.serviceCard} glass-panel ${activeService?.id === service.id ? `${styles.activeCard} glass-panel-active` : ''}`}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: 'easeOut', delay: index * 0.04 } }}
+                onClick={() => handleServiceSelect(service)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleServiceSelect(service);
+                  }
+                }}
               >
-                <div>
-                  <p className={styles.serviceTitle}>{service.title}</p>
-                  <p className={styles.serviceMeta}>{service.duration}</p>
+                <div className={styles.cardContent}>
+                  <h3 className={styles.serviceTitle}>{service.title}</h3>
+
+                  <div className={styles.serviceMetadata}>
+                    <span className={styles.serviceDuration}>{service.duration}</span>
+                    <span className={styles.servicePrice}>{service.price}</span>
+                  </div>
                 </div>
-                <span className={styles.priceBadge}>{service.price}</span>
+
+                <AnimatePresence initial={false}>
+                  {activeService?.id === service.id && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                      animate={{ height: 'auto', opacity: 1, marginTop: 16 }}
+                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                      style={{ overflow: 'hidden', width: '100%' }}
+                    >
+                      <button
+                        type="button"
+                        className={styles.inlineBookButton}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          triggerHaptic('heavy');
+                          window.open('https://dikidi.ru/1109266', '_blank');
+                        }}
+                      >
+                        Записаться онлайн
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
-          </div>
-          <div className={styles.actionsSticky}>
-            <button className="btn-ink" onClick={handleOnlineBooking}>
-              Записаться онлайн
-            </button>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
+    </div>
   );
 }

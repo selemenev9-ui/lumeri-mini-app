@@ -1,44 +1,54 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import bridge from '@vkontakte/vk-bridge';
 
 import HomeScreen from './screens/HomeScreen.jsx';
 import BookingScreen from './screens/BookingScreen.jsx';
 import PortfolioScreen from './screens/PortfolioScreen.jsx';
 import InfoScreen from './screens/InfoScreen.jsx';
-import AuraScreen from './screens/AuraScreen.jsx';
+import ProfileScreen from './screens/ProfileScreen.jsx';
+import OnboardingScreen from './screens/OnboardingScreen.jsx';
 import TabBar from './components/TabBar.jsx';
+import { useVK } from './contexts/VKContext.jsx';
 
 /**
  * Routes map. We use internal state for simplicity; @vkontakte/vk-mini-apps-router
  * is wired as a dependency and can be swapped in here for hash-based routing
  * when the app is published inside VK.
  */
-const ROUTES = ['home', 'booking', 'portfolio', 'info', 'aura'];
+const ROUTES = ['home', 'booking', 'portfolio', 'info', 'profile'];
 
 const pageVariants = {
-  initial: { opacity: 0, y: 20, filter: 'blur(8px)' },
-  animate: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
-  },
-  exit: {
-    opacity: 0,
-    y: -10,
-    filter: 'blur(4px)',
-    transition: { duration: 0.25 }
-  }
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.22, ease: 'easeOut' } },
+  exit: { opacity: 1, transition: { duration: 0 } }
 };
 
 const homeVariants = {
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.3 } },
-  exit: { opacity: 0, transition: { duration: 0.2 } }
+  animate: { opacity: 1, transition: { duration: 0.22, ease: 'easeOut' } },
+  exit: { opacity: 1, transition: { duration: 0 } }
 };
 
+function Loader() {
+  return (
+    <div
+      style={{
+        minHeight: '100dvh',
+        display: 'grid',
+        placeItems: 'center',
+        fontSize: '13px',
+        letterSpacing: '0.2em',
+        textTransform: 'uppercase',
+        color: 'var(--ink-60)'
+      }}
+    >
+      Загрузка
+    </div>
+  );
+}
+
 export default function App() {
+  const { isBridgeLoading, isFirstVisit, completeOnboarding } = useVK();
   const [route, setRoute] = useState('home');
   const [isDark, setIsDark] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
@@ -48,24 +58,29 @@ export default function App() {
     document.body.style.background = isDark ? '#111820' : '#F5F0E8';
   }, [isDark]);
 
-  useEffect(() => {
-    // Sync status-bar / nav color with VK client
-    bridge
-      .send('VKWebAppSetViewSettings', {
-        status_bar_style: 'dark',
-        action_bar_color: '#F4F6F8',
-        navigation_bar_color: '#FFFFFF'
-      })
-      .catch(() => {});
-  }, []);
-
   const navigate = (next) => {
     if (!ROUTES.includes(next)) return;
     setRoute(next);
   };
+  if (isBridgeLoading) {
+    return (
+      <div className="app-shell" style={{ background: isDark ? '#111820' : undefined }}>
+        <Loader />
+      </div>
+    );
+  }
+
+  if (isFirstVisit) {
+    return (
+      <div className="app-shell" style={{ background: isDark ? '#111820' : undefined }}>
+        <OnboardingScreen onComplete={completeOnboarding} />
+      </div>
+    );
+  }
 
   return (
     <div className="app-shell" style={{ background: isDark ? '#111820' : undefined }}>
+      <div className="material" />
       <AnimatePresence mode="wait">
         {currentScreen === 'home' && (
           <motion.div
@@ -119,16 +134,16 @@ export default function App() {
           </motion.div>
         )}
 
-        {currentScreen === 'aura' && (
+        {currentScreen === 'profile' && (
           <motion.div
-            key="aura"
+            key="profile"
             variants={pageVariants}
             initial="initial"
             animate="animate"
             exit="exit"
             style={{ width: '100%', height: '100%' }}
           >
-            <AuraScreen onNavigate={navigate} />
+            <ProfileScreen />
           </motion.div>
         )}
       </AnimatePresence>

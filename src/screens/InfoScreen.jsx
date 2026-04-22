@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import SplitText from '../components/SplitText.jsx';
 import { asset } from '../utils/assetUrl.js';
 import styles from './InfoScreen.module.css';
@@ -17,7 +18,13 @@ export default function InfoScreen() {
 
   return (
     <div className={styles.info}>
-      <div className="material" />
+      <motion.div
+        className={styles.ambientGlow}
+        animate={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(160, 220, 200, 0.8), transparent 70%)'
+        }}
+        transition={{ duration: 0.8, ease: 'easeInOut' }}
+      />
       <div className={styles.inner}>
         <div className={styles.heading}>
           <SplitText text="О студии" className={styles.title} delay={0.1} />
@@ -25,20 +32,20 @@ export default function InfoScreen() {
 
         <div className={styles.galleryRow}>
           {GALLERY.map((src, idx) => (
-            <div key={src} className={styles.galleryCard}>
+            <div key={src} className={`${styles.galleryCard} glass-panel`}>
               <img src={src} alt={`Студия ${idx + 1}`} loading="lazy" />
             </div>
           ))}
         </div>
 
-        <div className={`glass ${styles.card}`}>
+        <div className={`${styles.card} glass-panel`}>
           <p className={styles.cardLabel}>Контакты</p>
           <p className={styles.cardValue}>Ростов-на-Дону, Каменобродская 33/22</p>
           <p className={styles.cardValue}>пн–вс · 10:00—20:00</p>
           <a href="tel:+79001292299" className={styles.cardLink}>+7 (900) 129-22-99</a>
         </div>
 
-        <div className={`glass ${styles.card}`}>
+        <div className={`${styles.card} glass-panel`}>
           <p className={styles.cardLabel}>О мастере</p>
           <p className={styles.quote}>
             «Медицинский взгляд, ювелирная точность и абсолютный комфорт на каждой процедуре.»
@@ -50,7 +57,7 @@ export default function InfoScreen() {
             <button
               key={link.label}
               type="button"
-              className={`glass ${styles.link}`}
+              className={`${styles.link} glass-panel`}
               onClick={() => handleOpenExternal(link.url)}
             >
               <span>{link.label}</span>

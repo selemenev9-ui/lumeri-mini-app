@@ -1,14 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import bridge from '@vkontakte/vk-bridge';
 import Lenis from '@studio-freight/lenis';
 import App from './App.jsx';
+import { VKProvider } from './contexts/VKContext.jsx';
 import './styles/global.css';
-
-// Initialize VK Bridge for native VK Mini App integration
-bridge.send('VKWebAppInit').catch(() => {
-  // Not running inside VK — ignore in dev
-});
 
 const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
 
@@ -23,6 +18,8 @@ document.getElementById('root').style.overflow = 'visible';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <VKProvider>
+      <App />
+    </VKProvider>
   </React.StrictMode>
 );

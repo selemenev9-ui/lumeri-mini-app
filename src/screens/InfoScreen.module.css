@@ -1,7 +1,18 @@
 .info {
   position: relative;
-  min-height: 100dvh;
-  padding: calc(var(--safe-top) + 24px) 20px calc(var(--safe-bottom) + 120px);
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.ambientGlow {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(95px);
 }
 
 .inner {
@@ -10,6 +21,19 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 100%;
+  overflow-y: auto;
+  padding: calc(var(--safe-top) + 24px) 20px calc(var(--safe-bottom) + var(--tabbar-space));
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+
+.inner > * {
+  flex-shrink: 0;
+}
+
+.inner::-webkit-scrollbar {
+  display: none;
 }
 
 .heading {
@@ -34,7 +58,6 @@
   height: 280px;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 14px 28px rgba(28, 28, 30, 0.18);
 }
 
 .galleryCard img {
